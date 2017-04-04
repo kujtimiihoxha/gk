@@ -37,3 +37,5 @@ fabric.properties
 vendor/
 *.lock
 .idea/
+
+.DS_Store
