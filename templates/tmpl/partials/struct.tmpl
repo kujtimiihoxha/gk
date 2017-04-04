@@ -1,0 +1,2 @@
+type {{.Name}} struct { {{range $i,$v := .Vars}}
+{{$v.Name}} {{$v.Type}}{{end}} }

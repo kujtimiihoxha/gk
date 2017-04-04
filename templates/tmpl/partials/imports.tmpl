@@ -1,0 +1,4 @@
+{{if $}}import(
+{{range $i,$v := $}}{{if not (eq $v.Name "")}}{{$v.Name}} {{end}}{{$v.Type}}
+{{end}}
+){{end}}
