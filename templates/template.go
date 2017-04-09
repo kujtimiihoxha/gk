@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"fmt"
 	"github.com/Sirupsen/logrus"
+	"github.com/kujtimiihoxha/gk/utils"
+	"path/filepath"
 	"reflect"
 	"strings"
 	"text/template"
@@ -25,6 +27,21 @@ func funcMap() template.FuncMap {
 	return template.FuncMap{
 		"last": func(x int, a interface{}) bool {
 			return x == reflect.ValueOf(a).Len()-1
+		},
+		"toSnakeCase": func(s string) string {
+			return utils.ToLowerSnakeCase(s)
+		},
+		"toUpperFirstCamelCase": func(s string) string {
+			return utils.ToUpperFirstCamelCase(s)
+		},
+		"toUpperFirst": func(s string) string {
+			return utils.ToUpperFirst(s)
+		},
+		"fileSeparator": func() string {
+			return string(filepath.Separator)
+		},
+		"toCamelCase": func(s string) string {
+			return utils.ToCamelCase(s)
 		},
 	}
 }

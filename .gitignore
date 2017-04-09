@@ -40,3 +40,4 @@ vendor/
 
 .DS_Store
 *.iml
+test_dir/

@@ -2,8 +2,10 @@ package {{.Package}}{{if gt (len .Imports) 0}}
 {{template "imports" .Imports}}{{end}}{{if gt (len .Constants) 0}}
 {{template "constants" .Constants}}{{end}}{{if gt (len .Vars) 0}}
 {{template "vars" .Vars}}{{end}}{{if gt (len .Interfaces) 0}}
-{{range $i,$v := .Interfaces}}{{template "interface" $v}}{{end}}{{end}}{{if gt (len .Structs) 0}}
-{{range $i,$v := .Structs}}{{template "struct" $v}}{{end}}{{end}}{{if gt (len .Methods) 0}}
+{{range $i,$v := .Interfaces}}{{template "interface" $v}}
+{{end}}{{end}}{{if gt (len .Structs) 0}}
+{{range $i,$v := .Structs}}{{template "struct" $v}}
+{{end}}{{end}}{{if gt (len .Methods) 0}}
 {{range  $i,$v := .Methods}}{{if eq $v.Struct.Name ""}}
 {{template "func" $v}}{{else}}
 {{template "struct_function" $v}}{{end}}

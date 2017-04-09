@@ -1,10 +1,10 @@
-package generator
+package parser
 
 import (
 	"github.com/Sirupsen/logrus"
 	"github.com/kujtimiihoxha/gk/templates"
 	"go/format"
-	"fmt"
+	"golang.org/x/tools/imports"
 )
 
 type ParsedSrc interface {
@@ -44,11 +44,10 @@ type NamedTypeValue struct {
 
 func (f *File) String() string {
 	s, err := template.NewEngine().Execute("file", f)
-	fmt.Println(s)
 	if err != nil {
 		logrus.Panic(err)
 	}
-	dt, err := format.Source([]byte(s))
+	dt, err := imports.Process(f.Package, []byte(s), nil)
 	if err != nil {
 		logrus.Panic(err)
 	}
@@ -56,11 +55,21 @@ func (f *File) String() string {
 }
 
 func (m *Method) String() string {
-	s, err := template.NewEngine().ExecuteString("{{template \"func\" .}}", m)
-	if err != nil {
-		logrus.Panic(err)
+	str := ""
+	if m.Struct.Name != "" {
+		s, err := template.NewEngine().ExecuteString("{{template \"struct_function\" .}}", m)
+		if err != nil {
+			logrus.Panic(err)
+		}
+		str = s
+	} else {
+		s, err := template.NewEngine().ExecuteString("{{template \"func\" .}}", m)
+		if err != nil {
+			logrus.Panic(err)
+		}
+		str = s
 	}
-	dt, err := format.Source([]byte(s))
+	dt, err := format.Source([]byte(str))
 	if err != nil {
 		logrus.Panic(err)
 	}

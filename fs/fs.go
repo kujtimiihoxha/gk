@@ -1,12 +1,13 @@
 package fs
 
 import (
-	"github.com/spf13/afero"
-	"os"
-	"github.com/spf13/viper"
-	"github.com/Songmu/prompter"
 	"fmt"
 	"github.com/Sirupsen/logrus"
+	"github.com/Songmu/prompter"
+	"github.com/kujtimiihoxha/gk/templates"
+	"github.com/spf13/afero"
+	"github.com/spf13/viper"
+	"os"
 )
 
 type FileSystem interface {
@@ -20,31 +21,41 @@ type FileSystem interface {
 	Walk(root string, fc func(path string, info os.FileInfo, err error) error) error
 }
 
+var defaultFs *DefaultFs
+
 type DefaultFs struct {
-	fs afero.Fs
+	Fs afero.Fs
 }
 
 func (f *DefaultFs) init(dir string) {
 	var inFs afero.Fs
-	if viper.Get("testing") {
+	if viper.GetBool("gk_testing") {
 		inFs = afero.NewMemMapFs()
 	} else {
-		inFs = afero.NewOsFs()
+		if viper.GetString("gk_folder") != "" {
+			inFs = afero.NewBasePathFs(afero.NewOsFs(), viper.GetString("gk_folder"))
+		} else {
+			inFs = afero.NewOsFs()
+		}
 	}
 	if dir != "" {
-		f.fs = afero.NewBasePathFs(inFs, dir)
+		f.Fs = afero.NewBasePathFs(inFs, dir)
 	} else {
-		f.fs = inFs
+		f.Fs = inFs
+	}
+	if viper.GetBool("gk_testing") {
+		dt, _ := template.Asset("tmpl/gk.json.tmpl")
+		f.WriteFile("gk.json", string(dt), true)
 	}
 }
 func (f *DefaultFs) ReadFile(path string) (string, error) {
-	d, err := afero.ReadFile(f.fs, path)
+	d, err := afero.ReadFile(f.Fs, path)
 	return string(d), err
 }
 
 func (f *DefaultFs) WriteFile(path string, data string, force bool) error {
 
-	if b, _ := f.Exists(path); b && !(viper.GetBool("gk.force_override") || force) {
+	if b, _ := f.Exists(path); b && !(viper.GetBool("gk_force_override") || force) {
 		s, _ := f.ReadFile(path)
 		if s == data {
 			logrus.Warnf("`%s` exists and is identical it will be ignored", path)
@@ -55,27 +66,36 @@ func (f *DefaultFs) WriteFile(path string, data string, force bool) error {
 			return nil
 		}
 	}
-	return afero.WriteFile(f.fs, path, []byte(data), os.ModePerm)
+	return afero.WriteFile(f.Fs, path, []byte(data), os.ModePerm)
 }
 
 func (f *DefaultFs) Mkdir(path string) error {
-	return f.fs.Mkdir(path, os.ModePerm)
+	return f.Fs.Mkdir(path, os.ModePerm)
 }
 
 func (f *DefaultFs) MkdirAll(path string) error {
-	return f.fs.MkdirAll(path, os.ModePerm)
+	return f.Fs.MkdirAll(path, os.ModePerm)
 }
 func (f *DefaultFs) FilePathSeparator() string {
 	return afero.FilePathSeparator
 }
 func (f *DefaultFs) Exists(path string) (bool, error) {
-	return afero.Exists(f.fs, path)
+	return afero.Exists(f.Fs, path)
 }
 func (f *DefaultFs) Walk(root string, fc func(path string, info os.FileInfo, err error) error) error {
-	return afero.Walk(f.fs, root, fc)
+	return afero.Walk(f.Fs, root, fc)
 }
 func NewDefaultFs(dir string) *DefaultFs {
 	dfs := &DefaultFs{}
 	dfs.init(dir)
-	return dfs	
+	defaultFs = dfs
+	return dfs
+}
+
+func Get() *DefaultFs {
+	if defaultFs == nil {
+		return NewDefaultFs(viper.GetString("gk_folder"))
+	} else {
+		return defaultFs
+	}
 }

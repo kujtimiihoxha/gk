@@ -5,3 +5,4 @@ import:
   version: ^0.11.5
 - package: github.com/spf13/afero
 - package: github.com/spf13/viper
+- package: github.com/alioygur/godash

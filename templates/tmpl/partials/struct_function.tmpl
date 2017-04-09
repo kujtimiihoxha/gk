@@ -1,4 +1,4 @@
-func ({{.Struct.Name}} {{.Struct.Type}}) {{template "interface_func" .}}{{if not (eq .Body "")}}{{.Body}}{{else}}{
+func ({{.Struct.Name}} {{.Struct.Type}}) {{template "interface_func" .}}{ {{if not (eq .Body "")}}{{.Body}}{{else}}
 // Implement your business logic here
 {{if gt (len .Results) 0}}return {{template "func_return" .Results}}
-{{end}}}{{end}}
+{{end}}{{end}} }

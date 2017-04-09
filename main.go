@@ -1,97 +1,21 @@
+// Copyright © 2017 NAME HERE <EMAIL ADDRESS>
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
 package main
 
-import (
-	"fmt"
-	"github.com/kujtimiihoxha/gk/generator"
-)
+import "github.com/kujtimiihoxha/gk/cmd"
 
 func main() {
-	f := generator.File{
-		Package: "test",
-		Imports: []generator.NamedTypeValue{},
-		Vars: []generator.NamedTypeValue{
-			generator.NewNameType("test", "string"),
-			generator.NewNameTypeValue("i", "int", "4"),
-		},
-		Constants: []generator.NamedTypeValue{
-			generator.NewNameTypeValue("ic", "int", "4"),
-			generator.NewNameTypeValue("s", "string", "\"myVal\""),
-		},
-		Interfaces: []generator.Interface{
-			generator.NewInterface(
-				"IName",
-				[]generator.Method{
-					generator.NewMethod(
-						"MyMeth",
-						generator.NamedTypeValue{},
-						"",
-						[]generator.NamedTypeValue{},
-						[]generator.NamedTypeValue{},
-					),
-				},
-			),
-		},
-		Structs: []generator.Struct{
-			generator.NewStruct(
-				"MyStruct",
-				[]generator.NamedTypeValue{
-					generator.NewNameType("test", "string"),
-				},
-			),
-		},
-		Methods: []generator.Method{
-			generator.NewMethod(
-				"Normal",
-				generator.NamedTypeValue{},
-				"",
-				[]generator.NamedTypeValue{
-					generator.NewNameType("input", "string"),
-				},
-				[]generator.NamedTypeValue{
-					generator.NewNameType("res", "string"),
-				},
-			),
-			generator.NewMethod(
-				"WithBody",
-				generator.NamedTypeValue{},
-				`a:=\"hello\"
-				fmt.Println(a)
-				`,
-				[]generator.NamedTypeValue{
-					generator.NewNameType("input", "string"),
-				},
-				[]generator.NamedTypeValue{
-					generator.NewNameType("res", "string"),
-				},
-			),
-			generator.NewMethod(
-				"WithStruct",
-				generator.NamedTypeValue{Name:"mstr",Type:"*MyStruct"},
-				"",
-				[]generator.NamedTypeValue{
-					generator.NewNameType("input", "string"),
-				},
-				[]generator.NamedTypeValue{
-					generator.NewNameType("res", "string"),
-				},
-			),
-			generator.NewMethod(
-				"WithStructBody",
-				generator.NamedTypeValue{Name:"mstr",Type:"*MyStruct"},
-				`a:="hello"
-			fmt.Println(a)
-			`,
-				[]generator.NamedTypeValue{
-					generator.NewNameType("input", "string"),
-				},
-				[]generator.NamedTypeValue{
-					generator.NewNameType("res", "string"),
-				},
-			),
-		},
-	}
-	//v, e := t.Execute("service_interface", i)
-	//fmt.Println(e)
-	//b, _ := format.Source([]byte(v))
-	fmt.Println(f.String())
+	cmd.Execute()
 }
