@@ -16,6 +16,9 @@ var initCmd = &cobra.Command{
 			logrus.Error("You must provide the service name")
 			return
 		}
+		if viper.GetString("gk_transport") == "" {
+			viper.Set("gk_transport", viper.GetString("default_transport"))
+		}
 		gen := generator.NewServiceInitGenerator()
 		err := gen.Generate(args[0])
 		if err != nil {
@@ -27,16 +30,7 @@ var initCmd = &cobra.Command{
 
 func init() {
 	RootCmd.AddCommand(initCmd)
-
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// initCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	initCmd.Flags().StringP("transport", "t", viper.GetString("default_transport"), "Specify the transport you want to initiate for the service")
+	initCmd.Flags().StringP("transport", "t", "", "Specify the transport you want to initiate for the service")
 	viper.BindPFlag("gk_transport", initCmd.Flags().Lookup("transport"))
 
 }

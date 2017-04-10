@@ -3,7 +3,7 @@
     "path":"{{`{{toSnakeCase .ServiceName}}`}}{{fileSeparator}}pkg{{fileSeparator}}service",
     "file_name":"service.go",
     "interface_name":"{{`{{toUpperFirstCamelCase .ServiceName}}`}}Service",
-    "struct_name":"stub_{{`{{toCamel .ServiceName}}`}}Service"
+    "struct_name":"stub{{`{{toCamelCase .ServiceName}}`}}Service"
   },
   "middleware":{
     "name":"middleware.go"
