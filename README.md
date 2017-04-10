@@ -52,6 +52,12 @@ gk init hello
 ```
 this will create the service `struct` , `methods`, `endpoints`, `transport` .
 The final folder structure is the same as  [addsvc](https://github.com/peterbourgon/go-microservices/tree/master/addsvc) 
+
+## I don't like the folder structure!
+
+The folder structure that the generator is using is following https://github.com/go-kit/kit/issues/70 but 
+that can be changed using `gk.json` all the paths are configurable there.
+
 ## Cli Help
 Every command has the `-h` or `--help` flag this will give you more info on what the command does and how to use it.
 e.x 
@@ -86,7 +92,10 @@ The example you see here  https://github.com/go-kit/kit/issues/70
  - Implement middleware generator (service,endpoint).
  - Implement automatic creation of the service main file.
  - Tests tests tests ...
- 
+## Warnings
+
+- I only tested this on the mac, should work on other os-s but I have not tested it, I would appreciate feedback on this. 
+- Commands may change in the future, this project is still a work in progress.
 ## Contribute
 Thanks a lot for contributing. 
 
