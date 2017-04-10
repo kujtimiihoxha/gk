@@ -6,11 +6,12 @@ import (
 	"github.com/spf13/viper"
 	"os"
 	"strings"
+	"github.com/kujtimiihoxha/gk/utils"
 )
 
 func main() {
 	viper.AutomaticEnv()
-	gosrc := viper.GetString("GOPATH") + "/src/"
+	gosrc := utils.GetGOPATH() + "/src/"
 	pwd, err := os.Getwd()
 	if err != nil {
 		logrus.Error(err)

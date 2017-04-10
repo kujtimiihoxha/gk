@@ -217,7 +217,7 @@ func (sg *ServiceInitGenerator) generateHttpTransport(name string, iface *parser
 	defaultFs := fs.Get()
 	handlerFile := parser.NewFile()
 	handlerFile.Package = "http"
-	gosrc := viper.GetString("GOPATH") + "/src/"
+	gosrc := utils.GetGOPATH() + "/src/"
 	gosrc = strings.Replace(gosrc, "\\", "/", -1)
 	pwd, err := os.Getwd()
 	if err != nil {
@@ -372,7 +372,7 @@ func (sg *ServiceInitGenerator) generateEndpoints(name string, iface *parser.Int
 	file.Structs = []parser.Struct{
 		parser.NewStruct("Endpoints", []parser.NamedTypeValue{}),
 	}
-	gosrc := viper.GetString("GOPATH") + "/src/"
+	gosrc := utils.GetGOPATH() + "/src/"
 	gosrc = strings.Replace(gosrc, "\\", "/", -1)
 	pwd, err := os.Getwd()
 	if err != nil {
