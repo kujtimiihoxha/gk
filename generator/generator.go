@@ -205,12 +205,14 @@ func (sg *ServiceInitGenerator) Generate(name string) error {
 func (sg *ServiceInitGenerator) generateTransport(name string, iface *parser.Interface, transport string) error {
 	switch transport {
 	case "http":
+		logrus.Info("Selected http transport.")
 		return sg.generateHttpTransport(name, iface)
 	default:
 		return errors.New(fmt.Sprintf("Transport `%s` not supported", transport))
 	}
 }
 func (sg *ServiceInitGenerator) generateHttpTransport(name string, iface *parser.Interface) error {
+	logrus.Info("Generating http transport...")
 	te := template.NewEngine()
 	defaultFs := fs.Get()
 	handlerFile := parser.NewFile()
@@ -329,6 +331,7 @@ func (sg *ServiceInitGenerator) generateHttpTransport(name string, iface *parser
 	return defaultFs.WriteFile(tfile, handlerFile.String(), false)
 }
 func (sg *ServiceInitGenerator) generateEndpoints(name string, iface *parser.Interface) error {
+	logrus.Info("Generating endpoints...")
 	te := template.NewEngine()
 	defaultFs := fs.Get()
 	enpointsPath, err := te.ExecuteString(viper.GetString("endpoints.path"), map[string]string{
