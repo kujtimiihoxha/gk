@@ -14,8 +14,25 @@
 
 package main
 
-import "github.com/kujtimiihoxha/gk/cmd"
+import (
+	"github.com/kujtimiihoxha/gk/cmd"
+	"github.com/spf13/viper"
+	"strings"
+	"os"
+	"github.com/Sirupsen/logrus"
+)
 
 func main() {
+	viper.AutomaticEnv()
+	gosrc := viper.GetString("GOPATH") + "/src/"
+	pwd, err := os.Getwd()
+	if err != nil {
+		logrus.Error(err)
+		return
+	}
+	if !strings.HasPrefix(pwd,gosrc) {
+		logrus.Error("The project must be in the $GOPATH/src folder for the generator to work.")
+		return
+	}
 	cmd.Execute()
 }

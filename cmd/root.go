@@ -44,7 +44,6 @@ func init() {
 
 func initConfig() {
 	initViperDefaults()
-	viper.AutomaticEnv()
 	viper.SetFs(fs.NewDefaultFs("").Fs)
 	viper.SetConfigFile("gk.json")
 	if viper.GetBool("gk_debug") {
