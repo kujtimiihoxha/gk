@@ -15,7 +15,7 @@ go install github.com/kujtimiihoxha/gk
 When it is run for the first time it will search for `gk.json` configuration file, if it does not find it it will create one
 with the default settings.
 
-####Create a new service
+#### Create a new service
 Inside the project run:
 ```bash
 gk new service hello
@@ -78,15 +78,16 @@ Global Flags:
 ## What is working
 The example you see here  https://github.com/go-kit/kit/issues/70
 
-##TODO-s
+## TODO-s
 
  - Implement support for other transports besides `http`
  - Implement the update commands, this commands would be used to update an existing service e.x add 
  a new request parameter to a endpoint.
  - Implement middleware generator (service,endpoint).
  - Implement automatic creation of the service main file.
+ - Tests tests tests ...
  
-##Contribute
+## Contribute
 Thanks a lot for contributing. 
 
 To test your new features/bug-fixes you need a way to run `gk` inside your project this can be done using `test_dir`.
