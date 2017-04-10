@@ -4,7 +4,7 @@ Go-kit generator is a cli application that generates boilerplate code for your g
 
 ## Why?
 
-**Because I am lazy**, and because it would make it easier for go-kit newcomers to start using it.
+**Because I'm lazy**, and because it would make it easier for go-kit newcomers to start using it.
 
 ## Installation
 ```bash
