@@ -94,6 +94,7 @@ The example you see here  https://github.com/go-kit/kit/issues/70
  - Implement the update commands, this commands would be used to update an existing service e.x add 
  a new request parameter to an endpoint.
  - Implement middleware generator (service,endpoint).
+ - Implement generator for adding new transports to a service.
  - Implement automatic creation of the service main file.
  - Tests tests tests ...
 ## Warnings
