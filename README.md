@@ -1,6 +1,7 @@
 # Go-Kit generator.
 ### This generator is still a work in progress
 Go-kit generator is a cli application that generates boilerplate code for your go-kit services.
+
 ##Why?
 **Because I am lazy**, and because it would make it easier for go-kit newcomers to start using it.
 
