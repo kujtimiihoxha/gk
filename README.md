@@ -20,6 +20,10 @@ Inside the project run:
 ```bash
 gk new service hello
 ```
+or the shorter command:
+```bash
+gk n s hello
+```
 this will create a new service called `HelloService` inside :
 ```
 project
