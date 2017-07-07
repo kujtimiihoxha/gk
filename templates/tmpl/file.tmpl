@@ -1,4 +1,5 @@
-package {{.Package}}{{if gt (len .Imports) 0}}
+{{if ne .Comment ""}}{{.Comment}}
+{{end}}package {{.Package}}{{if gt (len .Imports) 0}}
 {{template "imports" .Imports}}{{end}}{{if gt (len .Constants) 0}}
 {{template "constants" .Constants}}{{end}}{{if gt (len .Vars) 0}}
 {{template "vars" .Vars}}{{end}}{{if gt (len .Interfaces) 0}}

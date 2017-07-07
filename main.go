@@ -3,15 +3,16 @@ package main
 import (
 	"github.com/Sirupsen/logrus"
 	"github.com/kujtimiihoxha/gk/cmd"
+	"github.com/kujtimiihoxha/gk/utils"
+	"github.com/spf13/afero"
 	"github.com/spf13/viper"
 	"os"
 	"strings"
-	"github.com/kujtimiihoxha/gk/utils"
 )
 
 func main() {
 	viper.AutomaticEnv()
-	gosrc := utils.GetGOPATH() + "/src/"
+	gosrc := utils.GetGOPATH() + afero.FilePathSeparator + "src" + afero.FilePathSeparator
 	pwd, err := os.Getwd()
 	if err != nil {
 		logrus.Error(err)

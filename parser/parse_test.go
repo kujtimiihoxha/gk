@@ -2,18 +2,22 @@ package parser
 
 import (
 	"fmt"
-	"golang.org/x/tools/imports"
 	"testing"
 )
 
 func TestName(t *testing.T) {
-	s, err := imports.Process("test", []byte(`
-	package main
-	func main(){
-	s:= generator.ServiceGenerator{}
-	fmt.Println(s)
-	}
-	`), nil)
-	fmt.Println(string(s), err)
+	p := NewFileParser()
+	v, _ := p.Parse([]byte(`
+	package service
+type ABC struct {
+
+}
+type MyService interface {
+	// Write your interface methods
+	Foo(a []string) (map[string][]*parser.FileParser, error)
+}
+
+	`))
+	fmt.Println(v.String())
 
 }

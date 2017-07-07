@@ -1,4 +1,4 @@
-type {{.Name}} interface {
+{{if ne .Comment ""}}{{.Comment}}{{end}}type {{.Name}} interface {
 {{range $i,$v := .Methods}}{{template "interface_func" $v}}
-{{end}}{{if lt (len .Methods) 1}}// Write your interface methods{{end}}
+{{end}}
 }

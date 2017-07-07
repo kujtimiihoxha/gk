@@ -12,6 +12,9 @@ import (
 func ToUpperFirstCamelCase(s string) string {
 	return strings.ToUpper(string(s[0])) + godash.ToCamelCase(s)[1:]
 }
+func ToLowerFirstCamelCase(s string) string {
+	return strings.ToLower(string(s[0])) + godash.ToCamelCase(s)[1:]
+}
 func ToUpperFirst(s string) string {
 	return strings.ToUpper(string(s[0])) + s[1:]
 }

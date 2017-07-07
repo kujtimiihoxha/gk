@@ -1,0 +1,10 @@
+syntax = "proto3";
+package pb;
+// The TestGrpc service definition.
+service TestGrpc {
+ rpc Foo (FooRequest) returns (FooReply) {}
+}
+message FooRequest {
+}
+message FooReply {
+}

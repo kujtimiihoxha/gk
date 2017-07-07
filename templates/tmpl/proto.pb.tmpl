@@ -1,0 +1,11 @@
+syntax = "proto3";
+package pb;
+// The {{.Name}} service definition.
+service {{.Name}} {
+{{range $i,$v := .Methods}} rpc {{$v.Name}} ({{$v.Request}}) returns ({{$v.Reply}}) {}
+{{end}}}
+{{range $i,$v := .Methods}}message {{$v.Request}} {
+}
+message {{$v.Reply}} {
+}
+{{end}}

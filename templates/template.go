@@ -38,6 +38,9 @@ func funcMap() template.FuncMap {
 			return utils.ToUpperFirst(s)
 		},
 		"fileSeparator": func() string {
+			if filepath.Separator == '\\' {
+				return "\\\\"
+			}
 			return string(filepath.Separator)
 		},
 		"toCamelCase": func(s string) string {

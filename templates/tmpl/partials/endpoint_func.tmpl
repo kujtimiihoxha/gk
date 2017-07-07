@@ -1,6 +1,6 @@
 
-    return func(ctx context.Context, request interface{}) (interface{}, error) {
-            req := request.({{.Request.Name}})
-            {{range $i,$v := .Calling.Results}}{{$v.Name}}{{if not (last $i $.Calling.Results)}},{{end}}{{end}} := svc.{{.Calling.Name}}(ctx,{{range $i,$v := .Request.Vars}} req.{{$v.Name}}{{if not (last $i $.Request.Vars)}},{{end}}{{end}})
+    return func(ctx context.Context,  {{if gt (len .Request.Vars) 0}}request{{else}}_{{end}} interface{}) (interface{}, error) {
+            {{if gt (len .Request.Vars) 0}}req := request.({{.Request.Name}})
+            {{end}}{{range $i,$v := .Calling.Results}}{{$v.Name}}{{if not (last $i $.Calling.Results)}},{{end}}{{end}} := svc.{{.Calling.Name}}(ctx,{{range $i,$v := .Request.Vars}} req.{{$v.Name}}{{if not (last $i $.Request.Vars)}},{{end}}{{end}})
             return {{.Response.Name}}{ {{range $i,$v := $.Calling.Results}}{{toUpperFirst $v.Name}}:{{$v.Name}}{{if not (last $i $.Calling.Results)}},{{end}}{{end}} }, nil
     }

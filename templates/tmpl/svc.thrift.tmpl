@@ -1,0 +1,9 @@
+{{range $i,$v := .Methods}}struct {{$v.Reply}}{
+}
+struct {{$v.Request}}{
+}{{end}}
+
+service {{.Name}}Service {
+{{range $i,$v := .Methods}} {{$v.Reply}} {{$v.Name}} (1: {{$v.Request}} req)
+{{end}}}
+

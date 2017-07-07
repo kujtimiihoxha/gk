@@ -1,5 +1,4 @@
-func {{template "interface_func" .}} { {{if not (eq .Body "")}}{{.Body}}{{else}}
-// Implement your business logic here
+{{if ne .Comment ""}}{{.Comment}}{{end}}func {{template "interface_func" .}} { {{if not (eq .Body "")}}{{.Body}}{{else}}
 {{if gt (len .Results) 0}}return {{template "func_return" .Results}}
 {{end}}  {{end}}
 }

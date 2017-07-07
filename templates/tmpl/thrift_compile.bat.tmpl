@@ -1,0 +1,4 @@
+:: Install thrift : https://thrift.apache.org/download
+thrift -r --gen "go:package_prefix={{.Package}}/gen-go/,thrift_import=github.com/apache/thrift/lib/go/thrift" {{.Name}}.thrift
+
+

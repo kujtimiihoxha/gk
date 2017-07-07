@@ -16,5 +16,9 @@
     "path":"{{`{{toSnakeCase .ServiceName}}`}}{{fileSeparator}}pkg{{fileSeparator}}{{`{{.TransportType}}`}}",
     "file_name":"handler.go"
   },
+  "cmd":{
+   "path":"cmd{{fileSeparator}}{{`{{toSnakeCase .ServiceName}}`}}",
+   "file_name":"main.go"
+  },
   "default_transport":"http"
 }
