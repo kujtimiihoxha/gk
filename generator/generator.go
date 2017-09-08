@@ -197,7 +197,7 @@ func (sg *ServiceInitGenerator) Generate(name string) error {
 			return s`, stub.Name),
 			[]parser.NamedTypeValue{},
 			[]parser.NamedTypeValue{
-				parser.NewNameType("s", "*"+stubName),
+				parser.NewNameType("s", iname),
 			},
 		)
 		s += "\n" + newMethod.String()
