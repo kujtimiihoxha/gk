@@ -603,9 +603,9 @@ func (sg *ServiceInitGenerator) generateEndpoints(name string, iface *parser.Int
 	file.Structs = []parser.Struct{
 		parser.NewStructWithComment(
 			"Endpoints",
-			`Endpoints collects all of the endpoints that compose an add service. It's
+			fmt.Sprintf(`Endpoints collects all of the endpoints that compose the %s service. It's
 				meant to be used as a helper struct, to collect all of the endpoints into a
-				single parameter.`,
+				single parameter.`, name),
 			[]parser.NamedTypeValue{}),
 	}
 	gosrc := utils.GetGOPATH() + "/src/"
