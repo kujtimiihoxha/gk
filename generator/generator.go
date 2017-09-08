@@ -34,8 +34,8 @@ func (sg *ServiceGenerator) Generate(name string) error {
 		return err
 	}
 	f.Interfaces = []parser.Interface{
-		parser.NewInterfaceWithComment(iname, `Implement yor service methods methods.
-		e.x: Foo(ctx context.Context,s string)(rs string, err error)`, []parser.Method{}),
+		parser.NewInterfaceWithComment(iname, fmt.Sprintf(`%s implements yor service methods.
+		e.x: Foo(ctx context.Context,s string)(rs string, err error)`, iname), []parser.Method{}),
 	}
 	defaultFs := fs.Get()
 
@@ -190,7 +190,7 @@ func (sg *ServiceInitGenerator) Generate(name string) error {
 	if !exists {
 		newMethod := parser.NewMethodWithComment(
 			"New",
-			`Get a new instance of the service.
+			`New return a new instance of the service.
 			If you want to add service middleware this is the place to put them.`,
 			parser.NamedTypeValue{},
 			fmt.Sprintf(`s = &%s{}
@@ -632,8 +632,9 @@ func (sg *ServiceInitGenerator) generateEndpoints(name string, iface *parser.Int
 		parser.NewNameType("", "\""+serviceImport+"\""),
 	}
 	file.Methods = []parser.Method{
-		parser.NewMethod(
+		parser.NewMethodWithComment(
 			"New",
+			"New return a new instance of the endpoint that wraps the provided service.",
 			parser.NamedTypeValue{},
 			"",
 			[]parser.NamedTypeValue{
