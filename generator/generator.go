@@ -659,8 +659,22 @@ func (sg *ServiceInitGenerator) generateEndpoints(name string, iface *parser.Int
 			n := strings.ToUpper(string(p.Name[0])) + p.Name[1:]
 			resultPrams = append(resultPrams, parser.NewNameType(n, p.Type))
 		}
-		req := parser.NewStruct(v.Name+"Request", reqPrams)
-		res := parser.NewStruct(v.Name+"Response", resultPrams)
+		req := parser.NewStructWithComment(
+			v.Name+"Request",
+			fmt.Sprintf(
+				"%sRequest collects the request parameters for the %s method.",
+				v.Name, v.Name,
+			),
+			reqPrams,
+		)
+		res := parser.NewStructWithComment(
+			v.Name+"Response",
+			fmt.Sprintf(
+				"%sResponse collects the response values for the %s method.",
+				v.Name, v.Name,
+			),
+			resultPrams,
+		)
 		file.Structs = append(file.Structs, req)
 		file.Structs = append(file.Structs, res)
 		tmplModel := map[string]interface{}{
