@@ -628,6 +628,7 @@ func (sg *ServiceInitGenerator) generateEndpoints(name string, iface *parser.Int
 	servicePath = strings.Replace(servicePath, "\\", "/", -1)
 	serviceImport := projectPath + "/" + servicePath
 	file.Imports = []parser.NamedTypeValue{
+		parser.NewNameType("", "\"github.com/go-kit/kit/endpoint\""),
 		parser.NewNameType("", "\""+serviceImport+"\""),
 	}
 	file.Methods = []parser.Method{
