@@ -1,3 +1,2 @@
-{{if ne .Comment ""}}{{.Comment}}
-{{end}}type {{.Name}} struct { {{range $i,$v := .Vars}}
+{{if ne .Comment ""}}{{.Comment}}{{end}}type {{.Name}} struct { {{range $i,$v := .Vars}}
 {{$v.Name}} {{$v.Type}}{{end}} }
